@@ -35,5 +35,11 @@ public class ApplicationModule {
         this.application = application;
     }
 
-    // TODO provide dependencies
+    // provide dependencies
+    @Provides
+    @Singleton
+    @Named("character_id")
+    int provideCharacterId() {
+        return Integer.valueOf(application.getString(R.string.character_id));
+    }
 }

@@ -18,6 +18,7 @@ package com.smassive.daggerworkshopgdg.app.view.activity;
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
+import com.smassive.daggerworkshopgdg.app.injector.component.DaggerApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
 import com.smassive.daggerworkshopgdg.app.view.adapter.ComicsAdapter;
@@ -40,6 +41,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -64,7 +68,9 @@ public class MainActivity extends BaseActivity
 
     private boolean twoPanel;
 
-    // TODO tell dagger he should inject this!
+    // tell dagger he should inject this!
+    @Inject
+    @Named("character_id")
     int characterId;
 
     @Override
@@ -90,7 +96,8 @@ public class MainActivity extends BaseActivity
     private void initializeInjector() {
         AndroidApplication application = (AndroidApplication) getApplication();
 
-        // TODO initialize injector
+        // initialize injector
+        application.getComponent().inject(this);
     }
 
     private void initializePresenter() {
