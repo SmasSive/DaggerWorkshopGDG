@@ -15,6 +15,7 @@
  */
 package com.smassive.daggerworkshopgdg.app.view.activity;
 
+import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
@@ -63,7 +64,8 @@ public class MainActivity extends BaseActivity
 
     private boolean twoPanel;
 
-    private int characterId;
+    // TODO tell dagger he should inject this!
+    int characterId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,15 @@ public class MainActivity extends BaseActivity
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
+        initializeInjector();
+
         initializePresenter();
+    }
+
+    private void initializeInjector() {
+        AndroidApplication application = (AndroidApplication) getApplication();
+
+        // TODO initialize injector
     }
 
     private void initializePresenter() {
@@ -93,7 +103,6 @@ public class MainActivity extends BaseActivity
         comicsPresenter = new ComicsPresenter(getComicsUseCase);
 
         comicsPresenter.setView(this);
-        characterId = Integer.valueOf(getString(R.string.character_id));
         comicsPresenter.getComics(characterId, false);
     }
 

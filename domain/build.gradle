@@ -1,10 +1,25 @@
 apply plugin: 'java'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
+def libs = rootProject.ext.libraries;
+
+compileJava {
+    //noinspection GroovyUnusedAssignment
+    sourceCompatibility = JavaVersion.VERSION_1_7
+    //noinspection GroovyUnusedAssignment
+    targetCompatibility = JavaVersion.VERSION_1_7
+}
+
+configurations {
+    provided
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'org.projectlombok:lombok:1.16.8'
+    // Arch dependencies
+    provided "com.google.dagger:dagger-compiler:${libs.dagger}"
+    provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
+    compile "com.google.dagger:dagger:${libs.dagger}"
+
+    compile "org.projectlombok:lombok:${libs.lombok}"
 }
