@@ -63,6 +63,16 @@ public class ComicDetailActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Initialize injections by field.
+     *
+     * @param applicationComponent {@link ApplicationComponent} main component.
+     */
+    @Override
+    protected void initializeInjector(ApplicationComponent applicationComponent) {
+        applicationComponent.inject(this);
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {

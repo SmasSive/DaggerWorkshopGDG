@@ -17,6 +17,7 @@ package com.smassive.daggerworkshopgdg.app.view.activity;
 
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
+import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
 
 import android.app.Fragment;
@@ -46,7 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ((AndroidApplication)getApplication()).getComponent().inject(this);
+        initializeInjector(getApplicationComponent());
     }
 
     protected void setUpToolbar(boolean showUpButton) {
@@ -81,4 +82,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         fragmentTransaction.replace(containerViewId, fragment, tag);
         fragmentTransaction.commit();
     }
+
+    /**
+     * Get the Main Application component for dependency injection.
+     *
+     * @return {@link ApplicationComponent}
+     */
+    private ApplicationComponent getApplicationComponent() {
+        return ((AndroidApplication)getApplication()).getComponent();
+    }
+
+    /**
+     * Initialize injections by field.
+     *
+     * @param applicationComponent {@link ApplicationComponent} main component.
+     */
+    protected abstract void initializeInjector(ApplicationComponent applicationComponent);
 }

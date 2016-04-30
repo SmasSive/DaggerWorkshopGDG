@@ -88,16 +88,17 @@ public class MainActivity extends BaseActivity
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
-        initializeInjector();
-
         initializePresenter();
     }
 
-    private void initializeInjector() {
-        AndroidApplication application = (AndroidApplication) getApplication();
-
-        // initialize injector
-        application.getComponent().inject(this);
+    /**
+     * Initialize injections by field.
+     *
+     * @param applicationComponent {@link ApplicationComponent} main component.
+     */
+    @Override
+    protected void initializeInjector(ApplicationComponent applicationComponent) {
+        applicationComponent.inject(this);
     }
 
     private void initializePresenter() {
