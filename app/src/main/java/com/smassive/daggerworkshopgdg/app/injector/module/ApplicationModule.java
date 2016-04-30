@@ -18,8 +18,6 @@ package com.smassive.daggerworkshopgdg.app.injector.module;
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 
-import android.content.Context;
-
 import javax.inject.Named;
 import javax.inject.Singleton;
 

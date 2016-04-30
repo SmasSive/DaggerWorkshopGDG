@@ -16,6 +16,7 @@
 package com.smassive.daggerworkshopgdg.app.view.activity;
 
 import com.smassive.daggerworkshopgdg.app.R;
+import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.view.fragment.ComicDetailFragment;
 
 import android.content.Context;
@@ -60,6 +61,16 @@ public class ComicDetailActivity extends BaseActivity {
         } else {
             comicId = savedInstanceState.getInt(EXTRA_COMIC_ID);
         }
+    }
+
+    /**
+     * Initialize injections by field.
+     *
+     * @param applicationComponent {@link ApplicationComponent} main component.
+     */
+    @Override
+    protected void initializeInjector(ApplicationComponent applicationComponent) {
+        applicationComponent.inject(this);
     }
 
     @Override

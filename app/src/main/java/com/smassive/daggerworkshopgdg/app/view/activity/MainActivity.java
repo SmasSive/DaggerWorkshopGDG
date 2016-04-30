@@ -18,7 +18,7 @@ package com.smassive.daggerworkshopgdg.app.view.activity;
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
-import com.smassive.daggerworkshopgdg.app.injector.component.DaggerApplicationComponent;
+import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
 import com.smassive.daggerworkshopgdg.app.view.adapter.ComicsAdapter;
@@ -88,16 +88,17 @@ public class MainActivity extends BaseActivity
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
-        initializeInjector();
-
         initializePresenter();
     }
 
-    private void initializeInjector() {
-        AndroidApplication application = (AndroidApplication) getApplication();
-
-        // initialize injector
-        application.getComponent().inject(this);
+    /**
+     * Initialize injections by field.
+     *
+     * @param applicationComponent {@link ApplicationComponent} main component.
+     */
+    @Override
+    protected void initializeInjector(ApplicationComponent applicationComponent) {
+        applicationComponent.inject(this);
     }
 
     private void initializePresenter() {
