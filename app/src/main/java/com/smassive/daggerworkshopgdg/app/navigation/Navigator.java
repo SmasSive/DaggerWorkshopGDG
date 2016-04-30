@@ -21,13 +21,16 @@ import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
 import android.app.Activity;
 import android.content.Intent;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Class used to navigate through the application.
  */
+@Singleton
 public class Navigator {
 
-    // TODO What should I do to let Dagger create an instance?
-
+    @Inject
     public Navigator() {
     }
 

@@ -18,7 +18,6 @@ package com.smassive.daggerworkshopgdg.app.view.activity;
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
-import com.smassive.daggerworkshopgdg.app.injector.component.DaggerApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
 import com.smassive.daggerworkshopgdg.app.view.adapter.ComicsAdapter;
