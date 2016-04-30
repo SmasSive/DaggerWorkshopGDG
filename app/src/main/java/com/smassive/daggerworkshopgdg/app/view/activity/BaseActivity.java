@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Sergi Castillo Open Source Project
- * <p>
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,7 @@ package com.smassive.daggerworkshopgdg.app.view.activity;
 
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
+import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
 
 import android.app.Fragment;
@@ -45,7 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((AndroidApplication) getApplication()).getComponent().inject(this);
+        initializeInjector(getApplicationComponent());
     }
 
     protected void setUpToolbar(boolean showUpButton) {
@@ -80,4 +81,20 @@ public abstract class BaseActivity extends AppCompatActivity {
         fragmentTransaction.replace(containerViewId, fragment, tag);
         fragmentTransaction.commit();
     }
+
+    /**
+     * Get the Main Application component for dependency injection.
+     *
+     * @return {@link ApplicationComponent}
+     */
+    private ApplicationComponent getApplicationComponent() {
+        return ((AndroidApplication) getApplication()).getComponent();
+    }
+
+    /**
+     * Initialize injections by field.
+     *
+     * @param applicationComponent {@link ApplicationComponent} main component.
+     */
+    protected abstract void initializeInjector(ApplicationComponent applicationComponent);
 }
