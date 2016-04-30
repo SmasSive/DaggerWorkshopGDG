@@ -26,6 +26,8 @@ import android.content.Intent;
  */
 public class Navigator {
 
+    // TODO What should I do to let Dagger create an instance?
+
     public Navigator() {
     }
 
