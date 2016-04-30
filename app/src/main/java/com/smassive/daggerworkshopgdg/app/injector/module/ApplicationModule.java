@@ -40,4 +40,6 @@ public class ApplicationModule {
     int provideCharacterId() {
         return Integer.valueOf(application.getString(R.string.character_id));
     }
+
+    // TODO: Provide a Navigator
 }
