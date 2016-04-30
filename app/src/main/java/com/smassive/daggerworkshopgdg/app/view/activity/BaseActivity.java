@@ -15,6 +15,7 @@
  */
 package com.smassive.daggerworkshopgdg.app.view.activity;
 
+import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
 
@@ -25,6 +26,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 
 /**
@@ -32,7 +35,8 @@ import butterknife.Bind;
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
-    protected Navigator navigator;
+    @Inject
+    Navigator navigator;
 
     @Nullable
     @Bind(R.id.toolbar)
@@ -42,8 +46,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO new Navigator? Smells!
-        navigator = new Navigator();
+        ((AndroidApplication)getApplication()).getComponent().inject(this);
     }
 
     protected void setUpToolbar(boolean showUpButton) {
