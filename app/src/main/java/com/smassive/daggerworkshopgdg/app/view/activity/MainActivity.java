@@ -19,6 +19,9 @@ import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
+import com.smassive.daggerworkshopgdg.app.injector.component.DaggerComicsComponent;
+import com.smassive.daggerworkshopgdg.app.injector.module.ActivityModule;
+import com.smassive.daggerworkshopgdg.app.injector.module.ComicsModule;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
 import com.smassive.daggerworkshopgdg.app.view.adapter.ComicsAdapter;
@@ -99,6 +102,12 @@ public class MainActivity extends BaseActivity
     @Override
     protected void initializeInjector(ApplicationComponent applicationComponent) {
         applicationComponent.inject(this);
+
+        // PerActivity injector initialization
+        DaggerComicsComponent.builder()
+                .applicationComponent(applicationComponent) // Main component must be set
+                .activityModule(new ActivityModule(this)) // Initialize dependencies
+                .comicsModule(new ComicsModule()).build().inject(this); // Make PerActivity module
     }
 
     private void initializePresenter() {

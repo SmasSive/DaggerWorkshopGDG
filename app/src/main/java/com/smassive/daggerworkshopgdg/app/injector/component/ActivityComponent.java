@@ -15,20 +15,22 @@
  */
 package com.smassive.daggerworkshopgdg.app.injector.component;
 
-import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
-import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
-import com.smassive.daggerworkshopgdg.app.view.activity.BaseActivity;
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
+import com.smassive.daggerworkshopgdg.app.injector.module.ActivityModule;
 
-import javax.inject.Singleton;
+import android.app.Activity;
 
 import dagger.Component;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
+/**
+ * A base component upon which fragment's components may depend. Activity-level components should extend this component.
+ * <p>
+ * Subtypes of ActivityComponent should be decorated with annotation: {@link PerActivity}
+ */
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
+public interface ActivityComponent {
 
-    // where should I inject the dependencies?
-    void inject(BaseActivity baseActivity);
-
-    Navigator getNavigator();
+    // Publicly available
+    Activity getActivity();
 }
