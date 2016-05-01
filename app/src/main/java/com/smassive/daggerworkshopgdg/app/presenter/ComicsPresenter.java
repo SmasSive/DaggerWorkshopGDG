@@ -15,6 +15,7 @@
  */
 package com.smassive.daggerworkshopgdg.app.presenter;
 
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.model.mapper.ComicModelMapper;
 import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
@@ -28,9 +29,12 @@ import android.util.Log;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * {@link Presenter} that controls communication between views and models of the presentation layer.
  */
+@PerActivity
 public class ComicsPresenter implements Presenter {
 
     private static final String TAG = ComicsPresenter.class.getName();
@@ -41,6 +45,7 @@ public class ComicsPresenter implements Presenter {
 
     private List<ComicModel> models;
 
+    @Inject
     public ComicsPresenter(GetComicsUseCase getComicsUseCase) {
         this.getComicsUseCase = getComicsUseCase;
     }
