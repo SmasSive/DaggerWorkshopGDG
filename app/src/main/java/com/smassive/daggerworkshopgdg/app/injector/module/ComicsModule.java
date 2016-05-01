@@ -17,6 +17,8 @@ package com.smassive.daggerworkshopgdg.app.injector.module;
 
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
+import com.smassive.daggerworkshopgdg.domain.interactor.GetComicUseCase;
+import com.smassive.daggerworkshopgdg.domain.interactor.GetComicUseCaseImpl;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCaseImpl;
 
@@ -41,5 +43,11 @@ public class ComicsModule {
     @PerActivity
     GetComicsUseCase provideGetComicsUseCase(GetComicsUseCaseImpl getComicsUseCase) {
         return getComicsUseCase;
+    }
+
+    @Provides
+    @PerActivity
+    GetComicUseCase provideGetComicUseCase(GetComicUseCaseImpl getComicUseCase) {
+        return getComicUseCase;
     }
 }

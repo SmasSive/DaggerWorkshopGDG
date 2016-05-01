@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Sergi Castillo Open Source Project
- * <p>
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,6 +22,7 @@ import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicDetailPresenter;
 import com.smassive.daggerworkshopgdg.app.presenter.Presenter;
+import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
 import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
 import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
 import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
@@ -43,6 +44,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -59,7 +62,8 @@ public class ComicDetailFragment extends BaseFragment {
     @Bind(R.id.comic_description)
     TextView comicDescription;
 
-    private ComicDetailPresenter comicDetailPresenter;
+    @Inject
+    ComicDetailPresenter comicDetailPresenter;
 
     private int comicId;
 
@@ -87,6 +91,8 @@ public class ComicDetailFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        ((ComicDetailActivity) getActivity()).getComicsComponent().inject(this);
+
         comicDetailPresenter.setView(this);
         comicId = getArguments().getInt(ARG_COMIC_ID);
         comicDetailPresenter.getComic(comicId);
@@ -98,13 +104,7 @@ public class ComicDetailFragment extends BaseFragment {
      */
     @Override
     void initializePresenter() {
-        ThreadExecutor threadExecutor = JobExecutor.getInstance();
-        PostExecutionThread postExecutionThread = UIThread.getInstance();
-        ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(getActivity());
-        ComicsRepository comicsRepository = ComicsRepositoryImpl.getInstance(comicDataStoreFactory);
-        GetComicUseCase getComicUseCase = new GetComicUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
-
-        comicDetailPresenter = new ComicDetailPresenter(getComicUseCase);
+        // Nothing to do here
     }
 
     @Override

@@ -31,17 +31,7 @@ import javax.inject.Singleton;
 @Singleton
 public class ComicsRepositoryImpl implements ComicsRepository {
 
-    private static ComicsRepositoryImpl INSTANCE;
-
     private ComicDataStoreFactory comicDataStoreFactory;
-
-    public static synchronized ComicsRepositoryImpl getInstance(ComicDataStoreFactory comicDataStoreFactory) {
-        if (INSTANCE == null) {
-            INSTANCE = new ComicsRepositoryImpl(comicDataStoreFactory);
-        }
-
-        return INSTANCE;
-    }
 
     @Inject
     public ComicsRepositoryImpl(ComicDataStoreFactory comicDataStoreFactory) {

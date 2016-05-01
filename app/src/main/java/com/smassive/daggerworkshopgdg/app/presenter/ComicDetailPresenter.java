@@ -15,6 +15,7 @@
  */
 package com.smassive.daggerworkshopgdg.app.presenter;
 
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.model.mapper.ComicModelMapper;
 import com.smassive.daggerworkshopgdg.app.view.fragment.ComicDetailFragment;
@@ -28,9 +29,12 @@ import android.util.Log;
 import java.util.List;
 import java.util.Random;
 
+import javax.inject.Inject;
+
 /**
  * {@link Presenter} that controls communication between views and models of the presentation layer.
  */
+@PerActivity
 public class ComicDetailPresenter implements Presenter {
 
     private static final int RANDOM_MIN = 0;
@@ -43,6 +47,7 @@ public class ComicDetailPresenter implements Presenter {
 
     private ComicModel model;
 
+    @Inject
     public ComicDetailPresenter(GetComicUseCase getComicUseCase) {
         this.getComicUseCase = getComicUseCase;
     }

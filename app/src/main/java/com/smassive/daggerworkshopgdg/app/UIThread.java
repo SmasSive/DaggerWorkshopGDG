@@ -1,6 +1,5 @@
 /**
  * Copyright (C) 2014 android10.org. All rights reserved.
- * @author Fernando Cejas (the android10 coder)
  */
 package com.smassive.daggerworkshopgdg.app;
 
@@ -19,29 +18,21 @@ import javax.inject.Singleton;
 @Singleton
 public class UIThread implements PostExecutionThread {
 
-  private static class LazyHolder {
-    private static final UIThread INSTANCE = new UIThread();
-  }
+    private final Handler handler;
 
-  public static UIThread getInstance() {
-    return LazyHolder.INSTANCE;
-  }
+    @Inject
+    public UIThread() {
+        this.handler = new Handler(Looper.getMainLooper());
+    }
 
-  private final Handler handler;
-
-  @Inject
-  public UIThread() {
-    this.handler = new Handler(Looper.getMainLooper());
-  }
-
-  /**
-   * Causes the Runnable r to be added to the message queue.
-   * The runnable will be run on the main thread.
-   *
-   * @param runnable {@link Runnable} to be executed.
-   */
-  @Override
-  public void post(Runnable runnable) {
-    handler.post(runnable);
-  }
+    /**
+     * Causes the Runnable r to be added to the message queue.
+     * The runnable will be run on the main thread.
+     *
+     * @param runnable {@link Runnable} to be executed.
+     */
+    @Override
+    public void post(Runnable runnable) {
+        handler.post(runnable);
+    }
 }
