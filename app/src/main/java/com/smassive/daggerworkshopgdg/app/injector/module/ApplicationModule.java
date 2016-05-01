@@ -16,8 +16,20 @@
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
+import com.smassive.daggerworkshopgdg.app.UIThread;
+import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
+import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
+import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
+import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
+import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
+import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
+
+import android.content.Context;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
+import dagger.Provides;
 
 @Module
 public class ApplicationModule {
@@ -29,4 +41,33 @@ public class ApplicationModule {
     }
 
     // provide dependencies
+    @Provides
+    @Singleton
+    Context provideContext() {
+        return application;
+    }
+
+    @Provides
+    @Singleton
+    ThreadExecutor provideThreadExecutor() {
+        return new JobExecutor();
+    }
+
+    @Provides
+    @Singleton
+    PostExecutionThread providePostExecutionThread() {
+        return new UIThread();
+    }
+
+    @Provides
+    @Singleton
+    ComicDataStoreFactory provideComicDataStoreFactory(Context context) {
+        return new ComicDataStoreFactory(context);
+    }
+
+    @Provides
+    @Singleton
+    ComicsRepository provideComicsRepository(ComicDataStoreFactory factory) {
+        return new ComicsRepositoryImpl(factory);
+    }
 }

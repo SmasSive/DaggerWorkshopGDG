@@ -19,12 +19,17 @@ import com.smassive.daggerworkshopgdg.data.R;
 
 import android.content.Context;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import io.realm.RealmConfiguration;
 
+@Singleton
 public class ComicDataStoreFactory {
 
     private final Context context;
 
+    @Inject
     public ComicDataStoreFactory(Context context) {
         this.context = context;
     }

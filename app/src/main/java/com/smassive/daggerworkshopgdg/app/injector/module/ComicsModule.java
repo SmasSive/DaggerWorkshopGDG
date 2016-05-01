@@ -16,11 +16,7 @@
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
 import com.smassive.daggerworkshopgdg.app.R;
-import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
-import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
-import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
-import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
 import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
@@ -46,11 +42,8 @@ public class ComicsModule {
 
     @Provides
     @PerActivity
-    GetComicsUseCase provideGetComicsUseCase(Activity activity) {
-        ThreadExecutor threadExecutor = JobExecutor.getInstance();
-        PostExecutionThread postExecutionThread = UIThread.getInstance();
-        ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(activity);
-        ComicsRepository comicsRepository = ComicsRepositoryImpl.getInstance(comicDataStoreFactory);
+    GetComicsUseCase provideGetComicsUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+            ComicsRepository comicsRepository) {
         return new GetComicsUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
     }
 }
