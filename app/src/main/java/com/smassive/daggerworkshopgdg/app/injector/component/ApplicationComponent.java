@@ -18,7 +18,6 @@ package com.smassive.daggerworkshopgdg.app.injector.component;
 import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
 import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
 import com.smassive.daggerworkshopgdg.app.view.activity.BaseActivity;
-import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
 import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
@@ -39,8 +38,6 @@ public interface ApplicationComponent {
     ThreadExecutor getThreadExecutor();
 
     PostExecutionThread getPostExecutionThread();
-
-    ComicDataStoreFactory getComicDataStoreFactory();
 
     ComicsRepository getComicsRepository();
 }

@@ -19,7 +19,6 @@ import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
 import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
-import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
 import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
@@ -49,25 +48,19 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    ThreadExecutor provideThreadExecutor() {
-        return new JobExecutor();
+    ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
+        return jobExecutor;
     }
 
     @Provides
     @Singleton
-    PostExecutionThread providePostExecutionThread() {
-        return new UIThread();
+    PostExecutionThread providePostExecutionThread(UIThread uiThread) {
+        return uiThread;
     }
 
     @Provides
     @Singleton
-    ComicDataStoreFactory provideComicDataStoreFactory(Context context) {
-        return new ComicDataStoreFactory(context);
-    }
-
-    @Provides
-    @Singleton
-    ComicsRepository provideComicsRepository(ComicDataStoreFactory factory) {
-        return new ComicsRepositoryImpl(factory);
+    ComicsRepository provideComicsRepository(ComicsRepositoryImpl comicsRepository) {
+        return comicsRepository;
     }
 }
