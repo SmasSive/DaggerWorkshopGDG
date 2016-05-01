@@ -15,23 +15,22 @@
  */
 package com.smassive.daggerworkshopgdg.data.repository.datasource;
 
-import com.smassive.daggerworkshopgdg.data.R;
-
-import android.content.Context;
-
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.inject.Singleton;
-
-import io.realm.RealmConfiguration;
 
 @Singleton
 public class ComicDataStoreFactory {
 
-    private final Context context;
+    private ComicDataStore retrofitComicDataStore;
+
+    private ComicDataStore realmComicDataStore;
 
     @Inject
-    public ComicDataStoreFactory(Context context) {
-        this.context = context;
+    public ComicDataStoreFactory(@Named("retrofit_comic_datastore") ComicDataStore retrofitComicDataStore,
+            @Named("realm_comic_datastore") ComicDataStore realmComicDataStore) {
+        this.retrofitComicDataStore = retrofitComicDataStore;
+        this.realmComicDataStore = realmComicDataStore;
     }
 
     public ComicDataStore create(boolean refresh) {
@@ -47,12 +46,11 @@ public class ComicDataStoreFactory {
     }
 
     private ComicDataStore createDbDataStore() {
-        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(context).deleteRealmIfMigrationNeeded().build();
-        return new RealmComicDataStore(realmConfiguration);
+        return realmComicDataStore;
     }
 
     private ComicDataStore createCloudDataStore() {
-        return new RetrofitComicDataStore(context.getString(R.string.public_key), context.getString(R.string.private_key));
+        return retrofitComicDataStore;
     }
 
 

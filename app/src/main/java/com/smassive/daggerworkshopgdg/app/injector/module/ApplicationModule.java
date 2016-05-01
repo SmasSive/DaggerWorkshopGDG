@@ -16,19 +16,32 @@
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
+import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
+import com.smassive.daggerworkshopgdg.data.net.ApiConstants;
+import com.smassive.daggerworkshopgdg.data.net.ComicApiService;
+import com.smassive.daggerworkshopgdg.data.net.interceptor.AuthInterceptor;
 import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
+import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStore;
+import com.smassive.daggerworkshopgdg.data.repository.datasource.RealmComicDataStore;
+import com.smassive.daggerworkshopgdg.data.repository.datasource.RetrofitComicDataStore;
 import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 
 import android.content.Context;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.realm.RealmConfiguration;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ApplicationModule {
@@ -62,5 +75,57 @@ public class ApplicationModule {
     @Singleton
     ComicsRepository provideComicsRepository(ComicsRepositoryImpl comicsRepository) {
         return comicsRepository;
+    }
+
+    @Provides
+    @Singleton
+    @Named("retrofit_comic_datastore")
+    ComicDataStore provideRetrofitComicDataStore(RetrofitComicDataStore retrofitComicDataStore) {
+        return retrofitComicDataStore;
+    }
+
+    @Provides
+    @Singleton
+    @Named("realm_comic_datastore")
+    ComicDataStore provideRealmComicDataStore(RealmComicDataStore realmComicDataStore) {
+        return realmComicDataStore;
+    }
+
+    @Provides
+    @Singleton
+    RealmConfiguration provideRealmConfiguration(Context context) {
+        return new RealmConfiguration.Builder(context).deleteRealmIfMigrationNeeded().build();
+    }
+
+    @Provides
+    @Singleton
+    @Named("public_key")
+    String providePublicKey() {
+        return application.getString(R.string.public_key);
+    }
+
+    @Provides
+    @Singleton
+    @Named("private_key")
+    String providePrivateKey() {
+        return application.getString(R.string.private_key);
+    }
+
+    @Provides
+    @Singleton
+    ComicApiService provideComicApiService(AuthInterceptor authInterceptor) {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(loggingInterceptor).addInterceptor(authInterceptor)
+                .build();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiConstants.ENDPOINT)
+                .client(httpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(ComicApiService.class);
     }
 }

@@ -2,6 +2,9 @@
     <string name="app_name">Comic Viewr</string>
     <string name="character_id">1009220</string>
 
+    <string name="public_key">1abd0d47cd0a92c0d353a30cceaaa241</string>
+    <string name="private_key">2e69c90a6c36f1b30c57eb0d82b91d45fdff9e00</string>
+
     <string name="error_request">Ops! Something\'s wrong!</string>
     <string name="error_comic">Comic information not found</string>
     <string name="error_no_title">No title available</string>

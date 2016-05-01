@@ -24,6 +24,8 @@ import com.smassive.daggerworkshopgdg.domain.bean.ComicBo;
 import java.util.Collection;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
@@ -32,6 +34,7 @@ public class RealmComicDataStore implements ComicDataStore {
 
     private final RealmConfiguration realmConfiguration;
 
+    @Inject
     public RealmComicDataStore(final RealmConfiguration realmConfiguration) {
         this.realmConfiguration = realmConfiguration;
     }

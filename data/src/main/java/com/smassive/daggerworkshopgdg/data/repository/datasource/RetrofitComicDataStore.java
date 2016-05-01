@@ -25,6 +25,8 @@ import com.smassive.daggerworkshopgdg.domain.bean.ComicBo;
 
 import java.util.Collection;
 
+import javax.inject.Inject;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -37,22 +39,9 @@ public class RetrofitComicDataStore implements ComicDataStore {
 
     private ComicApiService comicApiService;
 
-    public RetrofitComicDataStore(String publicKey, String privateKey) {
-        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        AuthInterceptor authInterceptor = new AuthInterceptor(publicKey, privateKey);
-
-        OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(loggingInterceptor).addInterceptor(authInterceptor)
-                .build();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiConstants.ENDPOINT)
-                .client(httpClient)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        this.comicApiService = retrofit.create(ComicApiService.class);
+    @Inject
+    public RetrofitComicDataStore(ComicApiService comicApiService) {
+        this.comicApiService = comicApiService;
     }
 
     /**
