@@ -10,8 +10,19 @@ Step by step "daggerization" of a common application.
 
 <br/>
 
-
 Instructions
 ------------
 
-Not specified yet
+The workshop consists in a series of exercises which are identified in the master branch of the repo by tags.
+The solutions of each exercise are tagged in the repo as well (don't look at them before you tried the exercise! Don't cheat on me!)
+
+The exercise are:
+- Exercise #1: Your first injection! Inject a simple object as a String is.
+- Exercise #2: Increase a little the complexity, inject a class. Several solutions included!
+- Exercise #3: A real world example, inject a class with dependencies.
+- Exercise #4: #PerfMatters... Introducing scopes!
+- Exercise #5: Became a master in Dagger 2
+- Exercise #6: That's easy, right?
+
+To complete the workshop you need a Marvel account in order to get all the amazing comics from our favorite super hero.
+You can get it at <a href="http://developer.marvel.com/">Developer Marvel</a> by registering and getting a key. Once you have your key, go to string resources and put your key on!
