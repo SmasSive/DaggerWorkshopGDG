@@ -15,6 +15,7 @@
  */
 package com.smassive.daggerworkshopgdg.app;
 
+import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.injector.component.DaggerApplicationComponent;
 import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
@@ -30,6 +31,10 @@ public class AndroidApplication extends Application {
         super.onCreate();
 
         initializeInjector();
+
+        if (BuildConfig.DEBUG) {
+            AndroidDevMetrics.initWith(this);
+        }
     }
 
     private void initializeInjector() {
