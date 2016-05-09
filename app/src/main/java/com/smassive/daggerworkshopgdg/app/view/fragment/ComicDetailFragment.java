@@ -18,19 +18,11 @@ package com.smassive.daggerworkshopgdg.app.view.fragment;
 import com.google.common.base.Strings;
 
 import com.smassive.daggerworkshopgdg.app.R;
-import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicDetailPresenter;
 import com.smassive.daggerworkshopgdg.app.presenter.Presenter;
 import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
-import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
-import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
-import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
-import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
-import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
-import com.smassive.daggerworkshopgdg.domain.interactor.GetComicUseCase;
-import com.smassive.daggerworkshopgdg.domain.interactor.GetComicUseCaseImpl;
-import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
+import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import android.app.Activity;
@@ -91,7 +83,11 @@ public class ComicDetailFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ((ComicDetailActivity) getActivity()).getComicsComponent().inject(this);
+        if (getActivity() instanceof ComicDetailActivity) {
+            ((ComicDetailActivity) getActivity()).getComicsComponent().inject(this);
+        } else {
+            ((MainActivity) getActivity()).getComicsComponent().inject(this);
+        }
 
         comicDetailPresenter.setView(this);
         comicId = getArguments().getInt(ARG_COMIC_ID);

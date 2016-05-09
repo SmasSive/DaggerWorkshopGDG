@@ -15,10 +15,9 @@
  */
 package com.smassive.daggerworkshopgdg.app.view.activity;
 
-import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
-import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
+import com.smassive.daggerworkshopgdg.app.injector.component.ComicsComponent;
 import com.smassive.daggerworkshopgdg.app.injector.component.DaggerComicsComponent;
 import com.smassive.daggerworkshopgdg.app.injector.module.ActivityModule;
 import com.smassive.daggerworkshopgdg.app.injector.module.ComicsModule;
@@ -26,14 +25,6 @@ import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
 import com.smassive.daggerworkshopgdg.app.view.adapter.ComicsAdapter;
 import com.smassive.daggerworkshopgdg.app.view.fragment.ComicDetailFragment;
-import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
-import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
-import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
-import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
-import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
-import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
-import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCaseImpl;
-import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -77,11 +68,14 @@ public class MainActivity extends BaseActivity
     @Named("character_id")
     int characterId;
 
+    private ComicsComponent comicsComponent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        comicsComponent.inject(this);
 
         setUpToolbar(false);
 
@@ -105,10 +99,14 @@ public class MainActivity extends BaseActivity
         applicationComponent.inject(this);
 
         // PerActivity injector initialization
-        DaggerComicsComponent.builder()
+        comicsComponent = DaggerComicsComponent.builder()
                 .applicationComponent(applicationComponent) // Main component must be set
                 .activityModule(new ActivityModule(this)) // Initialize dependencies
-                .comicsModule(new ComicsModule()).build().inject(this); // Make PerActivity module
+                .comicsModule(new ComicsModule()).build(); // Make PerActivity module
+    }
+
+    public ComicsComponent getComicsComponent() {
+        return comicsComponent;
     }
 
     private void initializePresenter() {
