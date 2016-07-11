@@ -17,6 +17,7 @@ package com.smassive.daggerworkshopgdg.app.injector.component;
 
 import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
 
+import com.smassive.daggerworkshopgdg.app.view.activity.BaseActivity;
 import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
 import javax.inject.Singleton;
 
@@ -28,5 +29,5 @@ public interface ApplicationComponent {
 
   void inject(MainActivity mainActivity);
 
-  // TODO: Where should I inject the dependencies?
+  void inject(BaseActivity baseActivity);
 }
