@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Sergi Castillo Open Source Project
- * <p/>
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p/>
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p/>
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,24 +15,30 @@
  */
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
-import com.smassive.daggerworkshopgdg.app.AndroidApplication;
-import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
+
+import android.app.Activity;
+
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 
+/**
+ * A module to wrap the Activity state and expose it to the graph.
+ */
 @Module
-public class ApplicationModule {
+public class ActivityModule {
+  private final Activity activity;
 
-  private final AndroidApplication application;
-
-  public ApplicationModule(AndroidApplication application) {
-    this.application = application;
+  public ActivityModule(Activity activity) {
+    this.activity = activity;
   }
 
+  /**
+   * Expose the activity to dependents in the graph.
+   */
   @Provides
-  @Singleton
-  Navigator provideNavigator() {
-    return new Navigator();
+  @PerActivity
+  Activity provideActivity() {
+    return this.activity;
   }
 }

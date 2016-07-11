@@ -15,17 +15,20 @@
  */
 package com.smassive.daggerworkshopgdg.app.injector.component;
 
-import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
-import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
-import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
+import com.smassive.daggerworkshopgdg.app.injector.module.ActivityModule;
+import com.smassive.daggerworkshopgdg.app.injector.module.ComicsModule;
+import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
+
 import dagger.Component;
-import javax.inject.Singleton;
 
-@Singleton
-@Component(modules = ApplicationModule.class)
-public interface ApplicationComponent {
+/**
+ * A scoped {@link PerActivity} component.
+ */
+@PerActivity
+@Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, ComicsModule.class})
+public interface ComicsComponent extends ActivityComponent {
 
-  void inject(ComicDetailActivity comicDetailActivity);
-
-  Navigator getNavigator();
+  // injections
+  void inject(MainActivity mainActivity);
 }

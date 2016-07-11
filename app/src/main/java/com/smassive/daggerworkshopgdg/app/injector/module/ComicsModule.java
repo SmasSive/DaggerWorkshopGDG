@@ -15,24 +15,23 @@
  */
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
-import com.smassive.daggerworkshopgdg.app.AndroidApplication;
-import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
+import com.smassive.daggerworkshopgdg.app.R;
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
+
+import android.app.Activity;
+
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
-import javax.inject.Singleton;
 
 @Module
-public class ApplicationModule {
-
-  private final AndroidApplication application;
-
-  public ApplicationModule(AndroidApplication application) {
-    this.application = application;
-  }
+public class ComicsModule {
 
   @Provides
-  @Singleton
-  Navigator provideNavigator() {
-    return new Navigator();
+  @PerActivity
+  @Named("character_id")
+  int provideCharacterId(Activity activity) {
+    return Integer.valueOf(activity.getString(R.string.character_id));
   }
 }

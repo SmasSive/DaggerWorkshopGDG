@@ -15,21 +15,16 @@
  */
 package com.smassive.daggerworkshopgdg.app.navigation;
 
-import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
-import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
-
 import android.app.Activity;
 import android.content.Intent;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
+import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
 
 /**
  * Class used to navigate through the application.
  */
-@Singleton
 public class Navigator {
 
-    @Inject
     public Navigator() {
     }
 
