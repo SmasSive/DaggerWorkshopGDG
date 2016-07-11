@@ -17,7 +17,6 @@ package com.smassive.daggerworkshopgdg.app.injector.module;
 
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
-import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
 import dagger.Module;
 import dagger.Provides;
 import javax.inject.Named;
@@ -37,11 +36,5 @@ public class ApplicationModule {
   @Named("character_id")
   int provideCharacterId() {
     return Integer.valueOf(application.getString(R.string.character_id));
-  }
-
-  @Provides
-  @Singleton
-  Navigator provideNavigator() {
-    return new Navigator();
   }
 }
