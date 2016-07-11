@@ -63,7 +63,8 @@ public class MainActivity extends BaseActivity
     @Bind(R.id.item_list)
     RecyclerView recyclerView;
 
-    private ComicsPresenter comicsPresenter;
+    @Inject
+    ComicsPresenter comicsPresenter;
 
     private boolean twoPanel;
 
@@ -99,14 +100,6 @@ public class MainActivity extends BaseActivity
     }
 
     private void initializePresenter() {
-        ThreadExecutor threadExecutor = JobExecutor.getInstance();
-        PostExecutionThread postExecutionThread = UIThread.getInstance();
-        ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(this);
-        ComicsRepository comicsRepository = ComicsRepositoryImpl.getInstance(comicDataStoreFactory);
-        GetComicsUseCase getComicsUseCase = new GetComicsUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
-
-        comicsPresenter = new ComicsPresenter(getComicsUseCase);
-
         comicsPresenter.setView(this);
         comicsPresenter.getComics(characterId, false);
     }
