@@ -18,13 +18,10 @@ package com.smassive.daggerworkshopgdg.data.bean.dto.comic;
 import com.smassive.daggerworkshopgdg.data.bean.dto.BaseResponseDto;
 import com.smassive.daggerworkshopgdg.data.bean.dto.ListResponseDto;
 
-import lombok.Data;
-
 /**
  * Data Transfer Object that represents the JSON returned by the service.
  * This class represents the response of the service that returns a list of comics.
  */
-@Data
 public class ComicsResponseDto extends BaseResponseDto<ListResponseDto<ComicResponseDto>> {
 
 }

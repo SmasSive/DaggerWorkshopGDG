@@ -20,6 +20,4 @@ dependencies {
     provided "com.google.dagger:dagger-compiler:${libs.dagger}"
     provided "org.glassfish:javax.annotation:${libs.javax_annotation}"
     compile "com.google.dagger:dagger:${libs.dagger}"
-
-    compile "org.projectlombok:lombok:${libs.lombok}"
 }

@@ -56,8 +56,6 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:${libs.okhttp}"
     compile "com.squareup.okhttp3:logging-interceptor:${libs.okhttp}"
     compile "io.realm:realm-android:${libs.realm}"
-
-    compile "org.projectlombok:lombok:${libs.lombok}"
     compile "com.google.guava:guava:${libs.guava}"
 
     // Module dependencies

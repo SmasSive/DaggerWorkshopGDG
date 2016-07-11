@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Data</string>
 
-    <string name="public_key">GET_YOUR_OWN_PUBLIC_KEY</string>
-    <string name="private_key">GET_YOUR_OWN_PRIVATE_KEY</string>
+    <string name="public_key">60d2a5eabe320d605940e9c068bc805b</string>
+    <string name="private_key">4e342a7223d185b7c219630b35b55074bfbfac69</string>
 </resources>

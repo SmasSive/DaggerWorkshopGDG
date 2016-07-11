@@ -16,16 +16,12 @@
 package com.smassive.daggerworkshopgdg.data.bean.dto.comic;
 
 import com.smassive.daggerworkshopgdg.data.bean.dto.common.ImageResponseDto;
-
 import java.util.List;
-
-import lombok.Data;
 
 /**
  * Data Transfer Object that represents the JSON returned by the service.
  * This class contains information regarding a comic.
  */
-@Data
 public class ComicResponseDto {
 
     private int id;
@@ -39,4 +35,52 @@ public class ComicResponseDto {
     private ImageResponseDto thumbnail;
 
     private List<ImageResponseDto> images;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public ImageResponseDto getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(ImageResponseDto thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public List<ImageResponseDto> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageResponseDto> images) {
+        this.images = images;
+    }
 }

@@ -15,13 +15,10 @@
  */
 package com.smassive.daggerworkshopgdg.data.bean.dto;
 
-import lombok.Data;
-
 /**
  * Data Transfer Object that represents the JSON returned by the service.
  * This is the base response for all the requests.
  */
-@Data
 public class BaseResponseDto <T> {
 
     private int code;
@@ -37,4 +34,60 @@ public class BaseResponseDto <T> {
     private String etag;
 
     private T data;
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCopyright() {
+        return copyright;
+    }
+
+    public void setCopyright(String copyright) {
+        this.copyright = copyright;
+    }
+
+    public String getAttributionText() {
+        return attributionText;
+    }
+
+    public void setAttributionText(String attributionText) {
+        this.attributionText = attributionText;
+    }
+
+    public String getAttributionHTML() {
+        return attributionHTML;
+    }
+
+    public void setAttributionHTML(String attributionHTML) {
+        this.attributionHTML = attributionHTML;
+    }
+
+    public String getEtag() {
+        return etag;
+    }
+
+    public void setEtag(String etag) {
+        this.etag = etag;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }

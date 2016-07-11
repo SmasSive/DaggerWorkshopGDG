@@ -15,16 +15,29 @@
  */
 package com.smassive.daggerworkshopgdg.data.bean.dto.common;
 
-import lombok.Data;
-
 /**
  * Data Transfer Object that represents the JSON returned by the service.
  * This class contains information regarding an image.
  */
-@Data
 public class ImageResponseDto {
 
     private String path;
 
     private String extension;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getExtension() {
+        return extension;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
+    }
 }

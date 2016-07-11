@@ -13,11 +13,10 @@ ext {
     libraries = [
             dagger              : "2.4",
             javax_annotation    : "10.0-b28",
-            supportVersion      : "23.3.0",
+            supportVersion      : "24.0.0",
             butterknife         : "7.0.1",
             circleimageview     : "2.0.0",
             picasso             : "2.5.2",
-            lombok              : "1.16.8",
             retrofit            : "2.0.2",
             okhttp              : "3.2.0",
             realm               : "0.87.2",
@@ -30,7 +29,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.0-beta1'
+        classpath 'com.android.tools.build:gradle:2.1.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
