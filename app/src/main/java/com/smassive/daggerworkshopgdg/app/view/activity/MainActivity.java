@@ -15,6 +15,16 @@
  */
 package com.smassive.daggerworkshopgdg.app.view.activity;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import com.smassive.daggerworkshopgdg.app.AndroidApplication;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
@@ -29,19 +39,7 @@ import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCaseImpl;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
-
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-
 import java.util.List;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Main screen of the application. Contains the list of comics retrieved for a specific super hero.
@@ -63,7 +61,8 @@ public class MainActivity extends BaseActivity
 
     private boolean twoPanel;
 
-    private int characterId;
+    // TODO tell dagger he should inject this!
+    int characterId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +79,15 @@ public class MainActivity extends BaseActivity
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
 
+        initializeInjector();
+
         initializePresenter();
+    }
+
+    private void initializeInjector() {
+        AndroidApplication application = (AndroidApplication) getApplication();
+
+        // TODO initialize injector
     }
 
     private void initializePresenter() {
@@ -93,7 +100,6 @@ public class MainActivity extends BaseActivity
         comicsPresenter = new ComicsPresenter(getComicsUseCase);
 
         comicsPresenter.setView(this);
-        characterId = Integer.valueOf(getString(R.string.character_id));
         comicsPresenter.getComics(characterId, false);
     }
 
