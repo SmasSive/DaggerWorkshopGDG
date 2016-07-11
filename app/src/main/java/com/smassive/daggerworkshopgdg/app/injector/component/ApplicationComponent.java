@@ -16,12 +16,10 @@
 package com.smassive.daggerworkshopgdg.app.injector.component;
 
 import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
-
-import com.smassive.daggerworkshopgdg.app.view.activity.BaseActivity;
+import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
 import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
-import javax.inject.Singleton;
-
 import dagger.Component;
+import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = ApplicationModule.class)
@@ -29,5 +27,5 @@ public interface ApplicationComponent {
 
   void inject(MainActivity mainActivity);
 
-  void inject(BaseActivity baseActivity);
+  void inject(ComicDetailActivity comicDetailActivity);
 }
