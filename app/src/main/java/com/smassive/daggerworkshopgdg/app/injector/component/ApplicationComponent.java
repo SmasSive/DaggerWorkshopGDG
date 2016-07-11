@@ -27,4 +27,6 @@ import dagger.Component;
 public interface ApplicationComponent {
 
   void inject(MainActivity mainActivity);
+
+  // TODO: Where should I inject the dependencies?
 }
