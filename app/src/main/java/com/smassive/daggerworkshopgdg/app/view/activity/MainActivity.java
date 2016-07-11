@@ -40,6 +40,8 @@ import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCaseImpl;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 /**
  * Main screen of the application. Contains the list of comics retrieved for a specific super hero.
@@ -61,7 +63,8 @@ public class MainActivity extends BaseActivity
 
     private boolean twoPanel;
 
-    // TODO tell dagger he should inject this!
+    @Inject
+    @Named("character_id")
     int characterId;
 
     @Override
@@ -87,7 +90,7 @@ public class MainActivity extends BaseActivity
     private void initializeInjector() {
         AndroidApplication application = (AndroidApplication) getApplication();
 
-        // TODO initialize injector
+        application.getComponent().inject(this);
     }
 
     private void initializePresenter() {

@@ -16,7 +16,11 @@
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
 import com.smassive.daggerworkshopgdg.app.AndroidApplication;
+import com.smassive.daggerworkshopgdg.app.R;
 import dagger.Module;
+import dagger.Provides;
+import javax.inject.Named;
+import javax.inject.Singleton;
 
 @Module
 public class ApplicationModule {
@@ -27,5 +31,10 @@ public class ApplicationModule {
     this.application = application;
   }
 
-  // TODO provide dependencies
+  @Provides
+  @Singleton
+  @Named("character_id")
+  int provideCharacterId() {
+    return Integer.valueOf(application.getString(R.string.character_id));
+  }
 }
