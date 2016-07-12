@@ -81,8 +81,9 @@ public class ApplicationModule {
 
   @Provides
   @Singleton
-  @Named("retrofit_comic_datastore") ComicDataStore provideRetrofitComicDataStore(ComicApiService comicApiService) {
-    return new RetrofitComicDataStore(comicApiService);
+  @Named("retrofit_comic_datastore")
+  ComicDataStore provideRetrofitComicDataStore(RetrofitComicDataStore retrofitComicDataStore) {
+    return retrofitComicDataStore;
   }
 
   @Provides
@@ -105,12 +106,6 @@ public class ApplicationModule {
 
   @Provides
   @Singleton
-  AuthInterceptor provideAuthInterceptor(@Named("public_key") String publicKey, @Named("private_key") String privateKey) {
-    return new AuthInterceptor(publicKey, privateKey);
-  }
-
-  @Provides
-  @Singleton
   @Named("public_key")
   String providePublicKey() {
     return application.getString(R.string.public_key);
@@ -126,12 +121,13 @@ public class ApplicationModule {
   @Provides
   @Singleton
   @Named("realm_comic_datastore")
-  ComicDataStore provideRealmComicDataStore(RealmConfiguration realmConfiguration) {
-    return new RealmComicDataStore(realmConfiguration);
+  ComicDataStore provideRealmComicDataStore(RealmComicDataStore realmComicDataStore) {
+    return realmComicDataStore;
   }
 
   @Provides
-  @Singleton RealmConfiguration provideRealmConfiguration(Context context) {
+  @Singleton
+  RealmConfiguration provideRealmConfiguration(Context context) {
     return new RealmConfiguration.Builder(context).deleteRealmIfMigrationNeeded().build();
   }
 }

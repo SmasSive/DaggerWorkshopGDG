@@ -27,11 +27,15 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class RealmComicDataStore implements ComicDataStore {
 
     private final RealmConfiguration realmConfiguration;
 
+    @Inject
     public RealmComicDataStore(final RealmConfiguration realmConfiguration) {
         this.realmConfiguration = realmConfiguration;
     }
