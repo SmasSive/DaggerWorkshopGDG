@@ -21,14 +21,18 @@ import com.smassive.daggerworkshopgdg.data.exception.ComicsNotFoundException;
 import com.smassive.daggerworkshopgdg.data.net.ComicApiService;
 import com.smassive.daggerworkshopgdg.domain.bean.ComicBo;
 import java.util.Collection;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@Singleton
 public class RetrofitComicDataStore implements ComicDataStore {
 
     private ComicApiService comicApiService;
 
+    @Inject
     public RetrofitComicDataStore(ComicApiService comicApiService) {
         this.comicApiService = comicApiService;
     }

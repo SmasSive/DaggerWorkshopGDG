@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -32,6 +35,7 @@ import okhttp3.Response;
  * Class that implements {@link Interceptor} which is responsible for adding the necessary query parameters to authorize the
  * requests performed to API. More info at: http://developer.marvel.com/documentation/authorization
  */
+@Singleton
 public class AuthInterceptor implements Interceptor {
 
     public static final String HASH_ALGORITHM = "MD5";
@@ -42,7 +46,8 @@ public class AuthInterceptor implements Interceptor {
 
     private String privateKey;
 
-    public AuthInterceptor(String publicKey, String privateKey) {
+    @Inject
+    public AuthInterceptor(@Named("public_key") String publicKey, @Named("private_key") String privateKey) {
         this.publicKey = publicKey;
         this.privateKey = privateKey;
     }
