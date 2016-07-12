@@ -22,6 +22,7 @@ import com.smassive.daggerworkshopgdg.app.UIThread;
 import com.smassive.daggerworkshopgdg.app.model.ComicModel;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicDetailPresenter;
 import com.smassive.daggerworkshopgdg.app.presenter.Presenter;
+import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
 import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
 import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
 import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
@@ -45,6 +46,7 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import javax.inject.Inject;
 
 /**
  * Comic detail fragment.
@@ -59,7 +61,8 @@ public class ComicDetailFragment extends BaseFragment {
     @Bind(R.id.comic_description)
     TextView comicDescription;
 
-    private ComicDetailPresenter comicDetailPresenter;
+    @Inject
+    ComicDetailPresenter comicDetailPresenter;
 
     private int comicId;
 
@@ -87,9 +90,9 @@ public class ComicDetailFragment extends BaseFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        comicDetailPresenter.setView(this);
-        comicId = getArguments().getInt(ARG_COMIC_ID);
-        comicDetailPresenter.getComic(comicId);
+        ((ComicDetailActivity) getActivity()).getComicsComponent().inject(this);
+
+        initializePresenter();
     }
 
     /**
@@ -98,13 +101,9 @@ public class ComicDetailFragment extends BaseFragment {
      */
     @Override
     void initializePresenter() {
-        ThreadExecutor threadExecutor = JobExecutor.getInstance();
-        PostExecutionThread postExecutionThread = UIThread.getInstance();
-        ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(getActivity());
-        ComicsRepository comicsRepository = ComicsRepositoryImpl.getInstance(comicDataStoreFactory);
-        GetComicUseCase getComicUseCase = new GetComicUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
-
-        comicDetailPresenter = new ComicDetailPresenter(getComicUseCase);
+        comicDetailPresenter.setView(this);
+        comicId = getArguments().getInt(ARG_COMIC_ID);
+        comicDetailPresenter.getComic(comicId);
     }
 
     @Override

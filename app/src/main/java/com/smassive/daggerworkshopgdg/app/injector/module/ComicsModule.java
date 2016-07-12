@@ -18,7 +18,10 @@ package com.smassive.daggerworkshopgdg.app.injector.module;
 import android.app.Activity;
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
+import com.smassive.daggerworkshopgdg.app.presenter.ComicDetailPresenter;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
+import com.smassive.daggerworkshopgdg.domain.interactor.GetComicUseCase;
+import com.smassive.daggerworkshopgdg.domain.interactor.GetComicUseCaseImpl;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCaseImpl;
 import dagger.Module;
@@ -45,5 +48,16 @@ public class ComicsModule {
   @PerActivity
   GetComicsUseCase provideGetComicsUseCase(GetComicsUseCaseImpl getComicsUseCase) {
     return getComicsUseCase;
+  }
+
+  @Provides
+  @PerActivity ComicDetailPresenter provideComicDetailPresenter(GetComicUseCase getComicUseCase) {
+    return new ComicDetailPresenter(getComicUseCase);
+  }
+
+  @Provides
+  @PerActivity
+  GetComicUseCase provideGetComicUseCase(GetComicUseCaseImpl getComicUseCase) {
+    return getComicUseCase;
   }
 }

@@ -17,6 +17,10 @@ package com.smassive.daggerworkshopgdg.app.view.activity;
 
 import com.smassive.daggerworkshopgdg.app.R;
 import com.smassive.daggerworkshopgdg.app.injector.component.ApplicationComponent;
+import com.smassive.daggerworkshopgdg.app.injector.component.ComicsComponent;
+import com.smassive.daggerworkshopgdg.app.injector.component.DaggerComicsComponent;
+import com.smassive.daggerworkshopgdg.app.injector.module.ActivityModule;
+import com.smassive.daggerworkshopgdg.app.injector.module.ComicsModule;
 import com.smassive.daggerworkshopgdg.app.view.fragment.ComicDetailFragment;
 
 import android.content.Context;
@@ -39,6 +43,8 @@ public class ComicDetailActivity extends BaseActivity {
     ImageView comicImage;
 
     private int comicId;
+
+    private ComicsComponent comicsComponent;
 
     public static Intent getCallingIntent(Context context, int comicId) {
         Intent callingIntent = new Intent(context, ComicDetailActivity.class);
@@ -66,6 +72,13 @@ public class ComicDetailActivity extends BaseActivity {
     @Override
     protected void initializeInjector(ApplicationComponent applicationComponent) {
         applicationComponent.inject(this);
+
+        comicsComponent = DaggerComicsComponent.builder().applicationComponent(applicationComponent)
+            .activityModule(new ActivityModule(this)).comicsModule(new ComicsModule()).build();
+    }
+
+    public ComicsComponent getComicsComponent() {
+        return comicsComponent;
     }
 
     @Override
