@@ -15,25 +15,18 @@
  */
 package com.smassive.daggerworkshopgdg.app.injector.module;
 
-import com.smassive.daggerworkshopgdg.app.R;
-import com.smassive.daggerworkshopgdg.app.UIThread;
-import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
-
 import android.app.Activity;
-
+import com.smassive.daggerworkshopgdg.app.R;
+import com.smassive.daggerworkshopgdg.app.injector.PerActivity;
 import com.smassive.daggerworkshopgdg.app.presenter.ComicsPresenter;
-import com.smassive.daggerworkshopgdg.data.executor.JobExecutor;
-import com.smassive.daggerworkshopgdg.data.repository.ComicsRepositoryImpl;
-import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
 import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCase;
 import com.smassive.daggerworkshopgdg.domain.interactor.GetComicsUseCaseImpl;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
-import javax.inject.Named;
-
 import dagger.Module;
 import dagger.Provides;
+import javax.inject.Named;
 
 @Module
 public class ComicsModule {
@@ -47,14 +40,14 @@ public class ComicsModule {
 
   @Provides
   @PerActivity
-  ComicsPresenter provideComicsPresenter(Activity activity) {
-    ThreadExecutor threadExecutor = JobExecutor.getInstance();
-    PostExecutionThread postExecutionThread = UIThread.getInstance();
-    ComicDataStoreFactory comicDataStoreFactory = new ComicDataStoreFactory(activity);
-    ComicsRepository comicsRepository = ComicsRepositoryImpl.getInstance(comicDataStoreFactory);
-    GetComicsUseCase
-        getComicsUseCase = new GetComicsUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
-
+  ComicsPresenter provideComicsPresenter(GetComicsUseCase getComicsUseCase) {
     return new ComicsPresenter(getComicsUseCase);
+  }
+
+  @Provides
+  @PerActivity
+  GetComicsUseCase provideGetComicsUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+      ComicsRepository comicsRepository) {
+    return new GetComicsUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
   }
 }

@@ -25,7 +25,7 @@ public class UIThread implements PostExecutionThread {
 
   private final Handler handler;
 
-  private UIThread() {
+  public UIThread() {
     this.handler = new Handler(Looper.getMainLooper());
   }
 

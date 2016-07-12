@@ -18,6 +18,10 @@ package com.smassive.daggerworkshopgdg.app.injector.component;
 import com.smassive.daggerworkshopgdg.app.injector.module.ApplicationModule;
 import com.smassive.daggerworkshopgdg.app.navigation.Navigator;
 import com.smassive.daggerworkshopgdg.app.view.activity.ComicDetailActivity;
+import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
+import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
+import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
+import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 import dagger.Component;
 import javax.inject.Singleton;
 
@@ -28,4 +32,12 @@ public interface ApplicationComponent {
   void inject(ComicDetailActivity comicDetailActivity);
 
   Navigator getNavigator();
+
+  ThreadExecutor getThreadExecutor();
+
+  PostExecutionThread getPostExecutionThread();
+
+  ComicDataStoreFactory getComicDataStoreFactory();
+
+  ComicsRepository getComicsRepository();
 }

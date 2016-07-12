@@ -39,7 +39,7 @@ public class ComicsRepositoryImpl implements ComicsRepository {
         return INSTANCE;
     }
 
-    protected ComicsRepositoryImpl(ComicDataStoreFactory comicDataStoreFactory) {
+    public ComicsRepositoryImpl(ComicDataStoreFactory comicDataStoreFactory) {
         this.comicDataStoreFactory = comicDataStoreFactory;
     }
 
