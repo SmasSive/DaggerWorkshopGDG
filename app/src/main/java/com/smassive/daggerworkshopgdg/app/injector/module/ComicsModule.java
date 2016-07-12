@@ -46,8 +46,7 @@ public class ComicsModule {
 
   @Provides
   @PerActivity
-  GetComicsUseCase provideGetComicsUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-      ComicsRepository comicsRepository) {
-    return new GetComicsUseCaseImpl(threadExecutor, postExecutionThread, comicsRepository);
+  GetComicsUseCase provideGetComicsUseCase(GetComicsUseCaseImpl getComicsUseCase) {
+    return getComicsUseCase;
   }
 }
