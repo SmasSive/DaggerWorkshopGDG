@@ -20,6 +20,7 @@ import com.smassive.daggerworkshopgdg.domain.exception.ErrorBundle;
 import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import com.smassive.daggerworkshopgdg.domain.executor.ThreadExecutor;
 import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
+import javax.inject.Inject;
 
 /**
  * Get comic by comic identifier use case.
@@ -36,6 +37,7 @@ public class GetComicUseCaseImpl implements GetComicUseCase {
 
     private Callback callback;
 
+    @Inject
     public GetComicUseCaseImpl(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
             ComicsRepository comicsRepository) {
         this.threadExecutor = threadExecutor;

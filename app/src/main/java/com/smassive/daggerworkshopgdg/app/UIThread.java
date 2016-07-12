@@ -4,10 +4,9 @@
  */
 package com.smassive.daggerworkshopgdg.app;
 
-import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
-
 import android.os.Handler;
 import android.os.Looper;
+import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -17,14 +16,6 @@ import javax.inject.Singleton;
  */
 @Singleton
 public class UIThread implements PostExecutionThread {
-
-  private static class LazyHolder {
-    private static final UIThread INSTANCE = new UIThread();
-  }
-
-  public static UIThread getInstance() {
-    return LazyHolder.INSTANCE;
-  }
 
   private final Handler handler;
 

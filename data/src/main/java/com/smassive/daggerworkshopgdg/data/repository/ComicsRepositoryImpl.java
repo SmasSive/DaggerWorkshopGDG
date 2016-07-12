@@ -20,9 +20,8 @@ import com.smassive.daggerworkshopgdg.data.exception.RepositoryErrorBundle;
 import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStore;
 import com.smassive.daggerworkshopgdg.data.repository.datasource.ComicDataStoreFactory;
 import com.smassive.daggerworkshopgdg.data.repository.datasource.RealmComicDataStore;
-import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 import com.smassive.daggerworkshopgdg.domain.bean.ComicBo;
-
+import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 import java.util.Collection;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,17 +29,7 @@ import javax.inject.Singleton;
 @Singleton
 public class ComicsRepositoryImpl implements ComicsRepository {
 
-    private static ComicsRepositoryImpl INSTANCE;
-
     private ComicDataStoreFactory comicDataStoreFactory;
-
-    public static synchronized ComicsRepositoryImpl getInstance(ComicDataStoreFactory comicDataStoreFactory) {
-        if (INSTANCE == null) {
-            INSTANCE = new ComicsRepositoryImpl(comicDataStoreFactory);
-        }
-
-        return INSTANCE;
-    }
 
     @Inject
     public ComicsRepositoryImpl(ComicDataStoreFactory comicDataStoreFactory) {

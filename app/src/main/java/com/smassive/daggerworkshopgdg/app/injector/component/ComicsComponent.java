@@ -20,6 +20,7 @@ import com.smassive.daggerworkshopgdg.app.injector.module.ActivityModule;
 import com.smassive.daggerworkshopgdg.app.injector.module.ComicsModule;
 import com.smassive.daggerworkshopgdg.app.view.activity.MainActivity;
 
+import com.smassive.daggerworkshopgdg.app.view.fragment.ComicDetailFragment;
 import dagger.Component;
 
 /**
@@ -31,4 +32,6 @@ public interface ComicsComponent extends ActivityComponent {
 
   // injections
   void inject(MainActivity mainActivity);
+
+  void inject(ComicDetailFragment comicDetailFragment);
 }
