@@ -8,11 +8,14 @@ import com.smassive.daggerworkshopgdg.domain.executor.PostExecutionThread;
 
 import android.os.Handler;
 import android.os.Looper;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * MainThread (UI Thread) implementation based on a Handler instantiated with the main
  * application Looper.
  */
+@Singleton
 public class UIThread implements PostExecutionThread {
 
   private static class LazyHolder {
@@ -25,6 +28,7 @@ public class UIThread implements PostExecutionThread {
 
   private final Handler handler;
 
+  @Inject
   public UIThread() {
     this.handler = new Handler(Looper.getMainLooper());
   }

@@ -24,7 +24,10 @@ import com.smassive.daggerworkshopgdg.domain.repository.ComicsRepository;
 import com.smassive.daggerworkshopgdg.domain.bean.ComicBo;
 
 import java.util.Collection;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
+@Singleton
 public class ComicsRepositoryImpl implements ComicsRepository {
 
     private static ComicsRepositoryImpl INSTANCE;
@@ -39,6 +42,7 @@ public class ComicsRepositoryImpl implements ComicsRepository {
         return INSTANCE;
     }
 
+    @Inject
     public ComicsRepositoryImpl(ComicDataStoreFactory comicDataStoreFactory) {
         this.comicDataStoreFactory = comicDataStoreFactory;
     }
